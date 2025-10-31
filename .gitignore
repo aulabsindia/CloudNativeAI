@@ -1,0 +1,7 @@
+# binaries
+*.exe
+*.out
+
+# build directories
+bin/
+dist/
