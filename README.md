@@ -11,6 +11,12 @@ CN‑HyRAG stands for “Cloud Native Hybrid RAG.”
 - SREs
 - Kubernetes developers building client-go utilities and code assistants.
 
+**Try it yourself:**
+[<a href="https://github.com/aulabsindia/CloudNativeAI/blob/main/USAGE_GUIDE.md" target="_blank">
+  <strong>Jump to Quick Start</strong>
+</a>]
+
+
 The Problem
 ------------------------
 AI code generators and latest state of art LLMs have revolutionized development, but AI-generated Kubernetes client-go code fails validation half of the time due to:
