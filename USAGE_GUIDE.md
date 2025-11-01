@@ -2,14 +2,11 @@
 
 ```
 
-A simple quick try for the 
+# A simple quick try for the CN-HyRAG framework.
+--------------------------------------------------------
 
 1. Download the code:
-
-```
-git clone https://github.com/aulabsindia/CloudNativeAI/
-cd src
-```
+git clone https://github.com/aulabsindia/CloudNativeAI/; cd src
 
 2. Edit .env to update:
     a. YOUR_API_KEY
