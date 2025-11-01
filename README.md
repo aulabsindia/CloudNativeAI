@@ -71,6 +71,12 @@ This initial release focuses on Go code generation for Kubernetes client-go work
 - golangci‑lint — Go linter.
 - Go toolchain — go.mod, go build.
 
+### COMPATIBILITY
+The framework in dockerized form is driven by the environment configuration defined in the `.env` file. All components comprising of model selection, embedding service, vector database, and server parameters are automatically populated from these environment variables at startup. 
+This makes the system portable across environments. See [<a href="https://github.com/aulabsindia/CloudNativeAI/blob/main/CONFIGURATION.md" target="_blank">
+  <strong>CONFIGURATION.md</strong>
+</a>]
+
 
 **API Quick Start:**
 ----------------------
