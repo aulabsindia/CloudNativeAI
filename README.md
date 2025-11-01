@@ -140,10 +140,6 @@ A deep dive into the design and architecture can be found in
 ------------------------------------
 The /query-multi endpoint serves as part of a benchmarking API that evaluates multiple language models on code generation quality. It runs a given query across all configured models, measures performance (time duration, response length, quality score based on lint validation), and applies refinement iterations to assess improvement. The aggregated results provide a standardized benchmark for comparing model accuracy and code quality.  
 
-
-
-
-
-
-
-
+**DISCLAIMER **
+---------------
+Model comparisons in this repository across documents, code, or media are for illustrative purposes only. The metrics generated for the best response are specific to a given run and may vary because LLM behavior is non-deterministic. Any compatible model can produce an error‑free response with this framework at any time. Therefore, we make no claims about intrinsic model quality and do not endorse any vendor.
