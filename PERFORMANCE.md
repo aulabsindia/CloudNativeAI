@@ -1,4 +1,5 @@
-Performance Characteristics (Lab Results))
+```
+Performance Characteristics (Lab Results)
 
 Indexing Performance
 -- Small codebase (~5 files): 12-16 seconds
@@ -20,6 +21,8 @@ Quality Metrics  (depends on model)
 -- Additional refinements (up to 5, temp=0.15): approach 100% error-free delivery for tough cases
 
 Note
+The best performance that has been observed is generation of response in 40 secs with 100% accuracy.
 Performance may vary across environments and models. Results above reflect representative runs 
 using our default lab configuration. We recommend benchmarking on your infrastructure when 
 practical.
+```
