@@ -11,6 +11,13 @@ CN‑HyRAG stands for “Cloud Native Hybrid RAG.”
 - SREs
 - Kubernetes developers building client-go utilities and code assistants.
 
+**DEMO :**
+See the Refinement Process with CN-HyRAG framework and usage of generated K8s code with the DEMO kit: 
+[<a href="https://youtu.be/qv6fUD3ilO8" target="_blank">
+  <strong>Click for DEMO video</strong>
+</a>]
+This evaluation pipeline is designed to demonstrate framework capabilities for cloud-native applications and does not constitute a ranking, endorsement, or recommendation of any model or vendor.
+
 **Try it yourself:**
 [<a href="https://github.com/aulabsindia/CloudNativeAI/blob/main/USAGE_GUIDE.md" target="_blank">
   <strong>Jump to Quick Start</strong>
@@ -33,7 +40,7 @@ Existing RAG frameworks focus on retrieval but lack:
 - Iterative self-correction capabilities
 - Cloud Native domain-specific optimization for Kubernetes client-go
 
-**CN-HyRAG **fills this gap with the first self-healing, multi-model RAG framework purpose-built for Kubernetes code generation.
+**CN-HyRAG** fills this gap with the first self-healing, multi-model RAG framework purpose-built for Kubernetes code generation.
 
 ## Why CN‑HyRAG? 
 Unlike single-model code generators that produce inconsistent, error-prone code, CN-HyRAG combines:
