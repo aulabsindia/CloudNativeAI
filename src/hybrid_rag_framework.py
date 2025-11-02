@@ -58,6 +58,62 @@ from qdrant_client.models import VectorParams, Distance
 # Load environment variables from .env file
 load_dotenv()
 
+# Robust parsing of MAX_REFINEMENT_ITERATIONS environment variable
+def parse_max_refinement_iterations(explicit_value: Optional[int] = None) -> int:
+    """
+    Robustly parse MAX_REFINEMENT_ITERATIONS from environment with proper error handling.
+    """
+    DEFAULT = 3
+    HARD_MAX = 20
+    
+    if explicit_value is not None:
+        if isinstance(explicit_value, int) and explicit_value >= 0:
+            logging.info(f"[INFO] Using explicit max refinement iterations: {explicit_value}")
+            return explicit_value
+        logging.warning(f"[WARN] Invalid explicit max refinement iterations='{explicit_value}', falling back to default=3")
+        return DEFAULT
+    
+    raw = os.getenv("MAX_REFINEMENT_ITERATIONS")
+    
+    if raw is None:
+        logging.info(f"[INFO] MAX_REFINEMENT_ITERATIONS not set, falling back to default=3")
+        return DEFAULT
+    
+    raw_stripped = raw.strip()
+    
+    if raw_stripped == "":
+        logging.error(f"[ERROR] MAX_REFINEMENT_ITERATIONS='{raw}' unacceptable; falling back to default=3")
+        return DEFAULT
+    
+    if not re.fullmatch(r"[+-]?\d+", raw_stripped):
+        logging.error(f"[ERROR] MAX_REFINEMENT_ITERATIONS='{raw}' unacceptable; falling back to default=3")
+        return DEFAULT
+    
+    try:
+        value = int(raw_stripped)
+    except Exception:
+        logging.error(f"[ERROR] MAX_REFINEMENT_ITERATIONS='{raw}' unacceptable; falling back to default=3")
+        return DEFAULT
+    
+    if value < 0:
+        logging.warning(f"[WARN] MAX_REFINEMENT_ITERATIONS='{raw}' is negative; falling back to default=3")
+        return DEFAULT
+    
+    if value == 0:
+        logging.info(f"[INFO] MAX_REFINEMENT_ITERATIONS=0 (refinement disabled)")
+        return 0
+    
+    if value > HARD_MAX:
+        logging.warning(f"[WARN] MAX_REFINEMENT_ITERATIONS='{raw}' is very large, clamping to 20")
+        return HARD_MAX
+    
+    logging.info(f"[INFO] MAX_REFINEMENT_ITERATIONS={value} (valid)")
+    return value
+
+# effective max refinement iterations after robust parsing
+MAX_REFINEMENT_ITERATIONS_EFFECTIVE = parse_max_refinement_iterations()
+
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -565,7 +621,12 @@ class ErrorsRefinementAndSelfCorrection:
         """
 
         # Use explicit parameter if provided; otherwise fallback to environment variable or default.
-        self.max_refinement_iterations = max_refinement_iterations or int(os.getenv('MAX_REFINEMENT_ITERATIONS', '3'))
+        #self.max_refinement_iterations = max_refinement_iterations or int(os.getenv('MAX_REFINEMENT_ITERATIONS', '3'))
+        if max_refinement_iterations is not None:
+            self.max_refinement_iterations = parse_max_refinement_iterations(max_refinement_iterations)
+        else:
+            self.max_refinement_iterations = MAX_REFINEMENT_ITERATIONS_EFFECTIVE
+
 
     # Primary refinement method that iteratively fixes errors in the best response    
     def refine_response_iteratively(self, 
@@ -1895,8 +1956,9 @@ if __name__ == "__main__":
     print("")
 
     # Grab MAX_REFINEMENT_ITERATIONS from .env, set default=3. This indicates number of refinement passes.
-    max_refinement_iterations = os.getenv('MAX_REFINEMENT_ITERATIONS', '3')
-    print(f"  --> Max refinement iterations: {max_refinement_iterations}")
+    
+    max_refinement_iterations = MAX_REFINEMENT_ITERATIONS_EFFECTIVE
+    print(f" After --> Max refinement iterations: {max_refinement_iterations}")
     print("")
 
     # Launch Flask REST API server to serve RAG endpoints.
