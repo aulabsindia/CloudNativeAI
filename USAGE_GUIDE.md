@@ -26,6 +26,10 @@ Try this:
         git clone github.com/aulabsindia/k8s-demo-tools
     b. The DEMO kit has has handlers to list pod, deployments, secrets and pod-service mapper utilities.
         Copy the files from ./handlers to ./feeds. 
+3.1. Run , 
+     docker compose build 
+3.2. Run to kick off the framework
+     docker compose up -d
 
 4. Build RAG index :
    curl -s -X POST http://localhost:5001/build \
