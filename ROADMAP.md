@@ -2,6 +2,7 @@
 Future Enhancements (Roadmap)
 -----------------------------
 Short-Term
+- **WSGI server**: Enable gunicorn for Production readiness - TARGET - 15 Nov 2025
 - **Kubernetes manifests**: Enable Kubernetes deployment manifests (Deployment, Service, ConfigMap, Secret). - TARGET- Dec 15th 2025
 - **Batch query processing**: Enable concurrency for validation and query handling. -TARGET - Jan 30th 2026
 - **Upgrade packages**: Update to latest versions - TARGET - Mar 1st 2026
