@@ -16,7 +16,7 @@ Features:
     - Native static validation pipeline (golangci-lint/errors) with quality scoring.
     - Iterative self-correction loop for error refinement and model consensus.
     - Auto-refinement: best response is revalidated until all errors are fixed.
-    - REST API backend for webhooks, validation, and RAG queries.
+    - REST API backend for building RAG. status verification and querying.
 """
 
 import os
@@ -57,6 +57,13 @@ from qdrant_client.models import VectorParams, Distance
 
 # Load environment variables from .env file
 load_dotenv()
+
+# setup logging ..
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+logging.getLogger("httpx").setLevel(logging.INFO)
+logging.getLogger("urllib3").setLevel(logging.INFO)
 
 # Robust parsing of MAX_REFINEMENT_ITERATIONS environment variable
 def parse_max_refinement_iterations(explicit_value: Optional[int] = None) -> int:
@@ -112,13 +119,6 @@ def parse_max_refinement_iterations(explicit_value: Optional[int] = None) -> int
 
 # effective max refinement iterations after robust parsing
 MAX_REFINEMENT_ITERATIONS_EFFECTIVE = parse_max_refinement_iterations()
-
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
-
-logging.getLogger("httpx").setLevel(logging.INFO)
-logging.getLogger("urllib3").setLevel(logging.INFO)
 
 # Flask app for REST API
 app = Flask(__name__)
@@ -1946,7 +1946,7 @@ if __name__ == "__main__":
     print("    • Enabled for Azure OpenAI and OpenAI-compatible models")    
     print("    • Native static validation pipeline with quality scoring and consensus.")
     print("    • Auto-refinement: Best response gets refined until errors are fixed")
-    print("    • REST API backend for webhooks/querying.")
+    print("    • REST API backend for building RAG, status verification and querying.")
     print("")
 
     # Show configured models pulled via environment variables.
