@@ -5,6 +5,9 @@ Cloud Native- Hybrid Retrieval Augmented Generation Framework **[CN-HyRAG]** aut
 **Terminology:** 
 CN‑HyRAG stands for “Cloud Native Hybrid RAG.”
 
+![WhatsApp Image 2025-11-27 at 11 27 28 AM](https://github.com/user-attachments/assets/88dafacd-9453-4e75-9119-25d883a5f1c4)
+
+
 **Perfect for:** 
 - MLOps/AIOps engineers
 - Platform teams
